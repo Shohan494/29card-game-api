@@ -36,6 +36,26 @@ class DeckOfCardsController extends Controller
     	return $deck;
     }
 
+	public function distributeCardOne()
+	{		
+		$playerCards = [];
+		$tempArray = [];
 
+		$shuffledDeck = $this->shuffleDeck();
+		
+		for( $i = 0; $i < 4; $i++)
+		{
+			for( $j = 0; $j < 4; $j++)
+			{
+				array_push($tempArray, $shuffledDeck[$j]);
+				array_shift($shuffledDeck);
+			}
+			
+			$playerCards[$i] = $tempArray;
+			$tempArray = [];
+		}
+		
+		return $playerCards;
+	}
 
 }
