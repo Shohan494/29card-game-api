@@ -41,7 +41,7 @@ class DeckOfCardsController extends Controller
 
 	public function distributeCardOne()
 	{		
-		$playerCards = [];
+		$playerCards1 = [];
 		$tempArray = [];
 
 		$shuffledDeck = $this->shuffleDeck();
@@ -54,13 +54,13 @@ class DeckOfCardsController extends Controller
 				array_shift($shuffledDeck);
 			}
 			
-			$playerCards[$i] = $tempArray;
+			$playerCards1[$i] = $tempArray;
 			$tempArray = [];
 		}
 		
 		// Bid Call Fixing
 
-		$result = [ $playerCards, $shuffledDeck ];
+		$result = [ $playerCards1, $shuffledDeck ];
 		return $result;
 	}
 
@@ -68,9 +68,10 @@ class DeckOfCardsController extends Controller
 	{		
 		$result = $this->distributeCardOne();
 
+		$playerCards1 = $result[0];
 		$shuffledDeck = $result[1];
 
-		$playerCards = [];
+		$playerCards2 = [];
 		$tempArray = [];
 
 		for( $i = 0; $i < 4; $i++)
@@ -81,16 +82,23 @@ class DeckOfCardsController extends Controller
 				array_shift($shuffledDeck);
 			}
 
-			$playerCards[$i] = $tempArray;
+			$playerCards2[$i] = $tempArray;
 			$tempArray = [];
 
-		}	
-            return response()->json([
-	            'playerCards' => $playerCards,
-	            'shuffledDeck' => $shuffledDeck
-        ], 200);
+		}
+
+
+		$p1 = array_merge($playerCards1[0],$playerCards2[0]);
+		$p2 = array_merge($playerCards1[1],$playerCards2[1]);
+		$p3 = array_merge($playerCards1[2],$playerCards2[2]);
+		$p4 = array_merge($playerCards1[3],$playerCards2[3]);
+
+		$playerCards = [$p1, $p2, $p3, $p4];
+		return $playerCards;
 
 	}
+
+
 
 
 }
