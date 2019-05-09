@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 
 class DeckOfCardsController extends Controller
 {
-    public function create()
+    public function createDeck()
     {
     	$deck = [];
 
@@ -25,4 +25,17 @@ class DeckOfCardsController extends Controller
         return $deck;
 
     }
+
+    public function shuffleDeck()
+    {
+    	$deck = $this->createDeck();
+    	shuffle($deck);
+
+    	// cut from any index
+
+    	return $deck;
+    }
+
+
+
 }

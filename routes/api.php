@@ -18,5 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('createDeck', 'Api\DeckOfCardsController@create');
-
+Route::get('createDeck', 'Api\DeckOfCardsController@createDeck');
+Route::get('shuffleDeck', 'Api\DeckOfCardsController@shuffleDeck');
+Route::get('distributeCardOne', 'Api\DeckOfCardsController@distributeCardOne');
